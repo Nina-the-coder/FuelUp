@@ -1,42 +1,76 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+@import "tailwindcss";
+
+@theme {
+    /* Colors */
+    --color-bg: oklch(0.967 0.0029 264.54);
+    --color-card-bg: #d9d9d9;
+    --color-text: oklch(0.2598 0.0202 264.13);
+    --color-secondary-text: oklch(0.4983 0.0225 262.91);
+    --color-blue: oklch(0.567 0.2184 262.12);
+    --color-green: oklch(0.7471 0.1781 152.5);
+    --color-orange: oklch(0.7664 0.1585 68.01);
+    --color-red: oklch(0.6007 0.2083 26.16);
+
+    /* Fonts */
+    --font-sans: 'Inter', sans-serif;
+    --font-heading: 'Poppins', sans-serif;
+
+    /* Spacing */
+    /* --space-13: 3.25rem;
+    --space-18: 4.5rem; */
+
+    /* Border Radius */
+    --radius-xl: 5px; 
+    --radius-2xl: 10px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.dark {
+    --color-bg: #1A1D23;
+    --color-card-bg: #272c35;
+    --color-text: #E3E3E6;
+    --color-secondary-text: #A1A3B3;
+    --color-blue: #2B56D9;
+    --color-green: #40BF7F;
+    --color-orange: #f4a232;
+    --color-red: #E23636;
 }
 
-@keyframes logo-spin {
+.typewriter-text {
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0; /* Starting width */
+  animation: typing 2s steps(40, end) forwards;
+  display: inline-block;
+  position: relative;
+}
+
+.typewriter-text::after {
+  content: '|'; /* Cursor */
+  position: absolute;
+  right: 0;
+  animation: blink 0.5s steps(1, end) infinite;
+}
+
+@keyframes typing {
   from {
-    transform: rotate(0deg);
+    width: 0;
   }
   to {
-    transform: rotate(360deg);
+    width: 100%;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes blink {
+  from, to {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+/* Hide cursor after typing finishes */
+.typewriter-text.finished::after {
+  content: '';
+  animation: none;
 }
