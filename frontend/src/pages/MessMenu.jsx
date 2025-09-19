@@ -1,9 +1,64 @@
-import React from "react";
+import React, { useState } from "react";
+import VariantButton from "../components/VariantButton";
+import DayButton from "../components/DayButton";
+import FoodCard from "../components/FoodCard";
+import { MessMenuData } from "../messMenu.data";
 
 const MessMenu = () => {
-    return(
-        <div>Mess menu</div>
-    )
-}
+  const MealTypes = ["breakfast", "lunch", "snacks", "dinner"];
+  const Days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
+  const [activeDay, setActiveDay] = useState("sun");
 
-export default MessMenu
+  return (
+    <div className="flex flex-col w-full h-full">
+      <div className="w-full flex flex-col items-center sm:flex-row gap-4 p-4">
+        <div className="mx-8">
+          <VariantButton size="smsquare" variant="outline" icon="arrow-left" />
+        </div>
+        <div className="flex gap-4 w-full justify-center">
+          {Days.map((day, index) => (
+            <DayButton
+              key={index}
+              day={day.charAt(0).toUpperCase() + day.slice(1, 3)}
+              isSelected={day === activeDay}
+              onClick={() => setActiveDay(day)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col-reverse lg:flex-row w-full h-full">
+
+        {/* meals display */}
+        <div className="flex flex-col gap-4 p-4 lg:w-2/3">
+          {MealTypes.map((meal, index) => (
+            <div key={index} className="flex flex-col">
+              <div className="w-full h-0 border"></div>
+              <div className="text-[18px] m-2 font-bold">
+                {meal.charAt(0).toUpperCase() + meal.slice(1)}
+              </div>
+              <div className="w-full h-0 border"></div>
+              <div className="flex gap-4 overflow-x-auto p-4 flex-wrap">
+                {MessMenuData[activeDay][meal].map((item, index) => (
+                  <FoodCard key={index} foodItem={item} />
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* nutrition summary */}
+        <div className="bg-green/70 h-fit w-fit p-4 md:p-8 text-[14px] md:text-[16px] rounded-2xl shadow-lg m-4 flex flex-col gap-2">
+          <div className="font-bold text-[16px] md:text-[20px]">Today's Nutrition Summary</div>
+          <div className="h-0 w-full border my-2 md:mt-2 md:mb-4"></div>
+          <div>- Calories: 2000</div>
+          <div>- Protein: 150g</div>
+          <div>- Carbs: 250g</div>
+          <div>- Fats: 70g</div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MessMenu;

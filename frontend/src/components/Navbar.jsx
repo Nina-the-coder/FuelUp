@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import VariantButton from "./VariantButton";
 import Icon from "./Icon.jsx";
-import googleicon from "../assets/googleicon.png";
+import logo from "../assets/logo.jpg";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
@@ -18,16 +18,16 @@ const Navbar = () => {
   };
 
   return (
-    <div className="h-[50px] lg:h-[68px] w-full px-2 flex justify-between bg-card-bg items-center shadow-md">
-      <div className="flex items-center gap-2">
+    <div className="h-[50px] lg:h-[64px] w-full px-2 flex justify-between items-center border-b border-card-bg">
+      <div className="h-full flex items-center gap-2">
         <button
           className="hover:cursor-pointer hover:bg-gray-200 p-2 rounded-xl block lg:hidden"
           onClick={handleNavToggle}
         >
           <Icon name="menu" />
         </button>
-        <div className="h-auto w-[50px] flex justify-center items-center lg:ml-4">
-          <img src={googleicon} alt="FuelUp" />
+        <div className="h-9/10 w-auto flex justify-center items-center lg:ml-4">
+          <img src={logo} alt="FuelUp" className="h-full" />
         </div>
       </div>
 
