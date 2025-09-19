@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import VariantButton from "./VariantButton";
 import Icon from "./Icon.jsx";
-import logo from "../assets/logo.jpg";
+import logo from "../assets/Logo.jpg";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
