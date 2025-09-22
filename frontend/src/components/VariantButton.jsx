@@ -10,7 +10,7 @@ const VariantButton = ({
   className,
 }) => {
   const baseClasses =
-    "flex items-center justify-center hover:cursor-pointer gap-1";
+    "flex items-center justify-center hover:cursor-pointer";  // gap-1 was removed 
 
   const sizeClasses = {
     tiny: "h-[28px] w-[28px]",
@@ -24,12 +24,12 @@ const VariantButton = ({
 
   const variantClasses = {
     ghostCta:
-      "border-2 border-cta/60 rounded-xl text-text/90 hover:bg-blue hover:text-white",
+      "border-2 border-blue/60 rounded-xl text-text/90 hover:bg-blue hover:text-white",
     ghostRed:
       "border-2 border-red/60 text-text/90 rounded-xl hover:bg-red hover:text-white",
     ghostGreen:
       "border-2 border-green/60 text-text/90 rounded-xl hover:bg-green hover:text-white",
-    cta: "border-2 border-cta bg-blue text-white rounded-xl hover:bg-blue/90 hover:text-white",
+    cta: "border-2 border-blue bg-blue text-white rounded-xl hover:bg-blue/90 hover:text-white",
     red: "border-2 border-red bg-red text-white rounded-xl hover:bg-red/80",
     blue: "border-2 border-blue bg-cta text-white rounded-xl hover:bg-blue/80",
     green:

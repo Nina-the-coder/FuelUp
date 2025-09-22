@@ -15,7 +15,7 @@ const MessMenu = () => {
         <div className="mx-8">
           <VariantButton size="smsquare" variant="outline" icon="arrow-left" />
         </div>
-        <div className="flex gap-4 w-full justify-center">
+        <div className="flex gap-4 w-full justify-center md:justify-start">
           {Days.map((day, index) => (
             <DayButton
               key={index}

@@ -86,7 +86,7 @@ const FoodCard = ({ foodItem, handleLike, handleDislike }) => {
           />
           <VariantButton
             size="tiny"
-            variant={`${foodItem.liked === true ? "ghostRed": "red"}`}
+            variant={`${foodItem.disliked === true ? "red": "ghostRed"}`}
             icon="thumbs-down"
             onClick={handleDislike}
           />
