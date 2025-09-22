@@ -64,7 +64,7 @@ const Navbar = () => {
       {/* Mobile Nav Menu */}
       {navOpen && (
         <div className="absolute top-[50px] left-0 w-full bg-card-bg p-4 lg:hidden shadow-lg">
-          <ul className="flex flex-col gap-4 text-[18px] font-semibold">
+          <ul className="flex flex-col gap-4 text-[16px]">
             <li>
               <Link to="/" onClick={() => setNavOpen(false)}>
                 Dashboard

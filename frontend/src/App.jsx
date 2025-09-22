@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Login from "./pages/Login";
 import MealRecommendation from "./pages/MealRecommendation";
 import MessMenu from "./pages/MessMenu";
+import Signup from "./pages/Signup";
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/signup" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/meal-recommendation" element={<MealRecommendation />} />
           <Route path="/mess-menu" element={<MessMenu />} />
         </Routes>

@@ -30,14 +30,14 @@ const MessMenu = () => {
       <div className="flex flex-col-reverse lg:flex-row w-full h-full">
 
         {/* meals display */}
-        <div className="flex flex-col gap-4 p-4 lg:w-2/3">
+        <div className="flex flex-col gap-8 p-4 lg:w-2/3">
           {MealTypes.map((meal, index) => (
             <div key={index} className="flex flex-col">
-              <div className="w-full h-0 border"></div>
-              <div className="text-[18px] m-2 font-bold">
+              {/* <div className="w-full h-0 border"></div> */}
+              <div className="text-[18px] p-2 px-8 ml-8 mt-2 font-bold border bg-bg rounded-2xl shadow-md w-fit">
                 {meal.charAt(0).toUpperCase() + meal.slice(1)}
               </div>
-              <div className="w-full h-0 border"></div>
+              {/* <div className="w-full h-0 border"></div> */}
               <div className="flex gap-4 overflow-x-auto p-4 flex-wrap">
                 {MessMenuData[activeDay][meal].map((item, index) => (
                   <FoodCard key={index} foodItem={item} />
