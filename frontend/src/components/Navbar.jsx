@@ -7,6 +7,9 @@ import logo from "../assets/Logo.jpg";
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const navigate = useNavigate();
+  const navigateto = (path) => {
+    navigate(path);
+  };
 
   const handleNavToggle = () => {
     setNavOpen((prev) => !prev);
@@ -26,9 +29,12 @@ const Navbar = () => {
         >
           <Icon name="menu" />
         </button>
-        <div className="h-9/10 w-auto flex justify-center items-center lg:ml-4">
+        <button
+          className="h-9/10 w-auto flex justify-center items-center lg:ml-4 hover:cursor-pointer"
+          onClick={() => navigateto("/")}
+        >
           <img src={logo} alt="FuelUp" className="h-full" />
-        </div>
+        </button>
       </div>
 
       <div className="flex mx-4">

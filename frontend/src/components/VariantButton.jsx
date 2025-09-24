@@ -20,6 +20,7 @@ const VariantButton = ({
     large: "h-[35px] lg:h-[40px] w-[150px] text-[22px]",
     "extra-large":
       "w-[200px] lg:w-[400px] h-[60px] lg:h-[90px] text-[20px] lg:text-[32px]",
+    free: "h-full w-full", // width will be according to content
   };
 
   const variantClasses = {

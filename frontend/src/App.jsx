@@ -11,7 +11,7 @@ import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <div>
+    <div className="App h-vh bg-bg text-text">
       <BrowserRouter>
         <Navbar />
         <Routes>

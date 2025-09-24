@@ -3,8 +3,13 @@ import VariantButton from "../components/VariantButton";
 import DayButton from "../components/DayButton";
 import FoodCard from "../components/FoodCard";
 import { MessMenuData } from "../messMenu.data";
+import { useNavigate } from "react-router-dom";
 
 const MessMenu = () => {
+  const navigate = useNavigate();
+  const navigateto = (path) => {
+    navigate(path);
+  };
   const MealTypes = ["breakfast", "lunch", "snacks", "dinner"];
   const Days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
   const [activeDay, setActiveDay] = useState("sun");
@@ -13,7 +18,9 @@ const MessMenu = () => {
     <div className="flex flex-col w-full h-full">
       <div className="w-full flex flex-col items-center sm:flex-row gap-4 p-4">
         <div className="mx-8">
-          <VariantButton size="smsquare" variant="outline" icon="arrow-left" />
+          <VariantButton
+            onClick={() => navigateto("/")}
+          size="smsquare" variant="outline" icon="arrow-left" />
         </div>
         <div className="flex gap-4 w-full justify-center md:justify-start">
           {Days.map((day, index) => (
@@ -28,7 +35,6 @@ const MessMenu = () => {
       </div>
 
       <div className="flex flex-col-reverse lg:flex-row w-full h-full">
-
         {/* meals display */}
         <div className="flex flex-col gap-8 p-4 lg:w-2/3">
           {MealTypes.map((meal, index) => (
@@ -49,7 +55,9 @@ const MessMenu = () => {
 
         {/* nutrition summary */}
         <div className="bg-green/70 h-fit w-fit p-4 md:p-8 text-[14px] md:text-[16px] rounded-2xl shadow-lg m-4 flex flex-col gap-2">
-          <div className="font-bold text-[16px] md:text-[20px]">Today's Nutrition Summary</div>
+          <div className="font-bold text-[16px] md:text-[20px]">
+            Today's Nutrition Summary
+          </div>
           <div className="h-0 w-full border my-2 md:mt-2 md:mb-4"></div>
           <div>- Calories: 2000</div>
           <div>- Protein: 150g</div>
