@@ -8,7 +8,7 @@ const MealRecommendationCard = () => {
     navigate(path);
   };
   return (
-    <div className="h-fit max-w-[340px] min-w-[200px] flex-grow-1 rounded-2xl shadow-lg border-card-bg/80 flex flex-col">
+    <div className="h-fit max-w-[250px] min-w-[200px] flex-grow-1 rounded-2xl shadow-lg border-card-bg/80 flex flex-col">
       {/* photo */}
       <div className="bg-gray-300 h-[132px] w-full rounded-2xl"></div>
 
