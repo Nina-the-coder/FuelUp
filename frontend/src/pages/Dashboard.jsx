@@ -11,7 +11,7 @@ const Dashboard = () => {
         navigate(path);
     }
   return (
-    <div className="text-[1rem] p-4 flex flex-col md:flex-row gap-8">
+    <div className="text-[1rem] p-4 pb-16 flex flex-col md:flex-row gap-8">
       {/* today's menu */}
       <div className="w-full md:w-[30rem] flex flex-col gap-4">
         {/* full screen menu button */}

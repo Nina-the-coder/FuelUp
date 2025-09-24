@@ -15,12 +15,15 @@ const MessMenu = () => {
   const [activeDay, setActiveDay] = useState("sun");
 
   return (
-    <div className="flex flex-col w-full h-full">
-      <div className="w-full flex flex-col items-center sm:flex-row gap-4 p-4">
-        <div className="mx-8">
+    <div className="flex flex-col  w-full h-full">
+      <div className="w-full flex flex-col sm:flex-row gap-4 p-4">
+        <div className="mr-8">
           <VariantButton
             onClick={() => navigateto("/")}
-          size="smsquare" variant="outline" icon="arrow-left" />
+            size="smsquare"
+            variant="outline"
+            icon="arrow-left"
+          />
         </div>
         <div className="flex gap-4 w-full justify-center md:justify-start">
           {Days.map((day, index) => (
