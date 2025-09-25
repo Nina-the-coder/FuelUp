@@ -6,24 +6,27 @@ import { MessMenuData } from "../messMenu.data";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
-      const navigate = useNavigate();
-    const navigateto = (path) => { 
-        navigate(path);
-    }
+  const navigate = useNavigate();
+  const navigateto = (path) => {
+    navigate(path);
+  };
   return (
     <div className="text-[1rem] p-4 pb-16 flex flex-col md:flex-row gap-8">
       {/* today's menu */}
       <div className="w-full md:w-[30rem] flex flex-col gap-4">
         {/* full screen menu button */}
-        <div className="ml-8">
-          <VariantButton  
-            onClick ={() => navigateto("/mess-menu")}
-            size="smsquare" variant="outline" icon="maximize-2" />
+        <div className="ml-4 mt-4">
+          <VariantButton
+            onClick={() => navigateto("/mess-menu")}
+            size="smsquare"
+            variant="outline"
+            icon="maximize-2"
+          />
         </div>
 
         {/* meal cards */}
         <div className="flex flex-col w-full gap-4 overflow-x-auto p-4">
-            <DashboardMealSetCard mealSet={MessMenuData["sun"]} />
+          <DashboardMealSetCard mealSet={MessMenuData["sun"]} />
         </div>
       </div>
 

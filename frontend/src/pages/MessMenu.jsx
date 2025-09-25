@@ -15,8 +15,9 @@ const MessMenu = () => {
   const [activeDay, setActiveDay] = useState("sun");
 
   return (
-    <div className="flex flex-col  w-full h-full">
-      <div className="w-full flex flex-col sm:flex-row gap-4 p-4">
+    <div className="p-4">
+      {/* header */}
+      <div className="w-full flex items-center flex-col sm:flex-row gap-4 lg:m-4">
         <div className="mr-8">
           <VariantButton
             onClick={() => navigateto("/")}

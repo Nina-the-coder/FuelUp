@@ -12,12 +12,11 @@ const MealRecommendation = () => {
     navigate(path);
   };
   return (
-    <div className="p-4">
+    <div className="flex flex-col p-4">
       {/* header */}
-      <div className="flex flex-col sm:flex-row gap-2 lg:gap-8">
+      <div className="flex items-center flex-col sm:flex-row gap-2 lg:gap-8 lg:m-4">
         <VariantButton
           onClick={() => navigateto("/")}
-          className="lg:mx-8"
           size="smsquare"
           variant="outline"
           icon="arrow-left"
