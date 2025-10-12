@@ -9,7 +9,7 @@ const Login = () => {
         navigate(path);
     }
   return (
-    <div className="h-vh flex flex-col justify-center items-center p-4 md:p-8 ">
+    <div className="h-vh flex m-0 flex-col justify-center items-center p-4 md:p-8 ">
       <div className="text-[2rem] font-semibold mb-8">Fuel Up</div>
 
       {/* main form */}
