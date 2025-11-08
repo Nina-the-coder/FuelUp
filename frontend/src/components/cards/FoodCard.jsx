@@ -1,7 +1,9 @@
 import React from "react";
-import VariantButton from "./VariantButton";
+import VariantButton from "../VariantButton";
 
-const FoodCard = ({ foodItem, handleLike, handleDislike }) => {
+const FoodCard = ({ foodItem, onLike, onDislike }) => {
+  // ✅ renamed props from handleLike/handleDislike → onLike/onDislike (for consistency)
+
   // Tag styling for UI badges
   const tagsClass = {
     healthy_choice: "bg-green-100 text-green-800",
@@ -38,57 +40,53 @@ const FoodCard = ({ foodItem, handleLike, handleDislike }) => {
     vitamin_rich: "bg-indigo-50 text-indigo-700",
   };
 
-  // Dietary preferences (used for filters / highlighting user-specific meals)
-  const dietaryChoiceClass = {
-    vegan: "bg-yellow-50 border border-yellow-200 text-yellow-700",
-    vegetarian: "bg-purple-50 border border-purple-200 text-purple-700",
-    gluten_free: "bg-red-50 border border-red-200 text-red-700",
-    low_carb: "bg-pink-50 border border-pink-200 text-pink-700",
-    dairy_free: "bg-teal-50 border border-teal-200 text-teal-700",
-  };
-
   return (
-    <div className="flex flex-col bg-card-bg/60 rounded-2xl gap-2 w-[254px] h-fit text-[16px] shadow-lg p-4">
+    <div className="flex flex-col bg-card-bg/60 rounded-2xl gap-2 w-[254px] h-fit text-[16px] shadow-lg p-4 transition-all hover:scale-[1.02]">
+      {/* Tags */}
       <div className="flex gap-2 justify-end">
-        {foodItem.tags.map(
-          (tag, index) =>
-            index < 2 && (
-              <div
-                key={index}
-                className={`text-[14px] rounded-full px-2 ${tagsClass[tag]}`}
-              >
-                {tag}
-              </div>
-            )
-        )}
+        {foodItem.tags?.slice(0, 2).map((tag, index) => (
+          <div
+            key={index}
+            className={`text-[14px] rounded-full px-2 capitalize ${tagsClass[tag] || "bg-gray-100 text-gray-800"}`}
+          >
+            {tag.replace("_", " ")}
+          </div>
+        ))}
       </div>
 
-      <div className="flex">
+      {/* Food name */}
+      <div className="flex justify-between items-center">
         <div className="font-semibold">{foodItem.name}</div>
       </div>
-      <div className="flex justify-between items-center">
+
+      {/* Nutrition info + like/dislike */}
+      <div className="flex justify-between items-center mt-2">
         <div className="flex flex-col text-[14px] text-gray-600 ml-2">
           <div className="text-amber-700">
-            Calories: {foodItem.nutrition.calories}
+            Calories: {foodItem.nutrition?.calories ?? "--"}
           </div>
           <div className="text-blue-600">
-            Protein: {foodItem.nutrition.protein}g
+            Protein: {foodItem.nutrition?.protein ?? "--"}g
           </div>
-          <div className="">Carbs: {foodItem.nutrition.carbs}g</div>
-          <div className="">Fats: {foodItem.nutrition.fats}g</div>
+          <div>Carbs: {foodItem.nutrition?.carbs ?? "--"}g</div>
+          <div>Fats: {foodItem.nutrition?.fats ?? "--"}g</div>
         </div>
-        <div className="flex flex-col items-end mr-4 gap-4">
+
+        {/* Like / Dislike Buttons */}
+        <div className="flex flex-col items-end mr-2 gap-3">
           <VariantButton
             size="tiny"
-            variant={`${foodItem.liked === true ? "cta": "ghostCta"}`}
+            variant={foodItem.liked ? "cta" : "ghostCta"}
             icon="thumbs-up"
-            onClick={handleLike}
+            onClick={onLike}
+            title="Like this meal"
           />
           <VariantButton
             size="tiny"
-            variant={`${foodItem.disliked === true ? "red": "ghostRed"}`}
+            variant={foodItem.disliked ? "red" : "ghostRed"}
             icon="thumbs-down"
-            onClick={handleDislike}
+            onClick={onDislike}
+            title="Dislike this meal"
           />
         </div>
       </div>
