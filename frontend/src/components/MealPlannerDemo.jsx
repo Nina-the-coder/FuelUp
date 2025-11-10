@@ -378,7 +378,7 @@ export default function MealPlannerDemo({
       </section>
 
       {/* RIGHT: Planner summary & suggestions */}
-      <section className="space-y-4 mt-8 lg:mt-0 w-1/3">
+      <section className="space-y-4 mt-8 lg:mt-0 lg:w-1/3">
         <div>
           <h4 className="text-md font-semibold mb-2">Suggestions</h4>
           {result.success && (
