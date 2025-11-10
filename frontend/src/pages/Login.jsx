@@ -1,63 +1,146 @@
-import React from "react";
-import Icon from "../components/Icon";
+// Login.jsx
+import React, { useState } from "react";
+import axios from "axios";
 import googleicon from "../assets/googleicon.png";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-    const navigate = useNavigate();
-    const navigateto = (path) => { 
-        navigate(path);
+  const navigate = useNavigate();
+
+  // form state
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // ui state
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // basic client validation
+  const validate = () => {
+    if (!email || !password) {
+      setError("Please enter both email and password.");
+      return false;
     }
+    // simple email regex
+    const re = /\S+@\S+\.\S+/;
+    if (!re.test(email)) {
+      setError("Please enter a valid email address.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleSubmit = async (e) => {
+    e?.preventDefault();
+    setError("");
+    if (!validate()) return;
+
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/auth/login", { email, password });
+      // expected: { token, user }
+      const { token, user } = res.data || {};
+      if (!token) throw new Error("Missing token in response");
+      localStorage.setItem("token", token);
+      if (user) localStorage.setItem("user", JSON.stringify(user));
+      // optionally set default axios header
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+      navigate("/");
+    } catch (err) {
+      console.error(err);
+      const msg = err?.response?.data?.message || err.message || "Login failed";
+      setError(msg);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleGoogle = () => {
+    // redirect to your backend google OAuth entrypoint
+    window.location.href = "/api/auth/google";
+  };
+
   return (
-    <div className="h-vh flex m-0 flex-col justify-center items-center p-4 md:p-8 ">
-      <div className="text-[2rem] font-semibold mb-8">Fuel Up</div>
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gray-50">
+      <div className="w-full max-w-md bg-white rounded-2xl shadow-lg p-8">
+        <h2 className="text-2xl font-semibold mb-1 text-center">Fuel Up</h2>
+        <p className="text-sm text-gray-600 text-center mb-6">Welcome back — login to continue</p>
 
-      {/* main form */}
-      <div className="flex flex-col sm:w-[30rem] bg-card-bg p-8 md:p-16 rounded-2xl shadow-lg">
-        <div className="flex flex-col items-center mb-4">
-          <div className="text-[1.5rem] font-semibold ">Login</div>
-          <div className="text-[1rem] mb-4 ">
-            Enter your email to Login to this app
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {error && <div className="text-sm text-red-600 bg-red-50 border border-red-100 p-3 rounded">{error}</div>}
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="email@domain.com"
+              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
+              disabled={loading}
+              required
+            />
           </div>
-        </div>
 
-        <div className="flex flex-col items-center gap-4">
-          <input
-            className="border h-[40px] w-full rounded-xl px-4 py-0.5 border-card-bg/80 bg-white"
-            placeholder="email@domail.com"
-          />
-          <input
-            className="border h-[40px] w-full rounded-xl px-4 py-0.5 border-card-bg/80 bg-white"
-            type="password"
-            placeholder="password"
-          />
-          <div className="">
-            Don't have an account?{" "}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="password"
+              className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-200"
+              disabled={loading}
+              required
+            />
+          </div>
+
+          <div className="flex items-center justify-between text-sm">
+            <div>
+              Don't have an account?{" "}
+              <button
+                type="button"
+                onClick={() => navigate("/signup")}
+                className="text-blue-600 hover:underline"
+              >
+                Sign up
+              </button>
+            </div>
+            {/* optional forgot password link */}
             <button
-              onClick={() => navigateto("/signup")}
-              className="text-blue hover:underline hover:cursor-pointer"
+              type="button"
+              onClick={() => navigate("/forgot-password")}
+              className="text-gray-500 hover:underline"
             >
-              SignUp
+              Forgot?
             </button>
           </div>
-          <button className="w-full h-[40px] bg-text text-bg rounded-xl px-2 py-0.5 hover:bg-text/90 hover:cursor-pointer">
-            Login
+
+          <button
+            type="submit"
+            onClick={handleSubmit}
+            className={`w-full py-2 rounded-xl text-white ${loading ? "bg-blue-400" : "bg-blue-600 hover:bg-blue-700"}`}
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
           </button>
-          <div className="flex items-center w-full text-text/60 my-0.5">
-            <div className="flex-grow h-0 border"></div>
-            <div className="mx-2">or continue with</div>
-            <div className="flex-grow h-0 border"></div>
+
+          <div className="flex items-center text-sm text-gray-400">
+            <div className="flex-1 border-t" />
+            <div className="px-3">or continue with</div>
+            <div className="flex-1 border-t" />
           </div>
-          <button className="w-full h-[40px] py-0.5 flex items-center justify-between bg-bg/90 rounded-xl hover:border hover:cursor-pointer ">
-            <img
-              className="w-[40px] h-[24px] flex-shrink-0"
-              src={googleicon}
-              alt="G"
-            />
-            <div className="">Google</div>
-            <div className="w-[40px]"></div>
+
+          <button
+            type="button"
+            onClick={handleGoogle}
+            className="w-full py-2 rounded-xl border flex items-center justify-between px-3 hover:bg-gray-50"
+          >
+            <img src={googleicon} alt="Google" className="w-6 h-4" />
+            <span>Continue with Google</span>
+            <span className="w-6" />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
