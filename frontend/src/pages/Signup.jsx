@@ -129,10 +129,11 @@ const Signup = () => {
           <button type="submit" className="w-full h-[40px] bg-text text-bg rounded-xl px-2 py-0.5 hover:bg-text/90 hover:cursor-pointer">
             Sign up with email
           </button>
-          <div className="flex w-full items-center text-text/60 my-0.5">
-            <div className="flex-grow h-0 border"></div>
-            <div className="mx-2">or continue with</div>
-            <div className="flex-grow h-0 border"></div>
+
+          <div className="flex items-center text-sm text-gray-400">
+            <div className="flex-1 border-t" />
+            <div className="px-3">or continue with</div>
+            <div className="flex-1 border-t" />
           </div>
           <button type="button" className="w-full h-[40px] py-0.5 flex items-center justify-between bg-bg/90 rounded-xl hover:border hover:cursor-pointer ">
             <img
