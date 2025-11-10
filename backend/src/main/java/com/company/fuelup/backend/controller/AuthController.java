@@ -56,7 +56,8 @@ public class AuthController {
         String token = jwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(Map.of(
                 "message", "Signup successful",
-                "token", token
+                "token", token,
+                "username", user.getName()
         ));
     }
 
@@ -75,7 +76,8 @@ public class AuthController {
         String token = jwtUtil.generateToken(user.getEmail());
         return ResponseEntity.ok(Map.of(
                 "message", "Login successful",
-                "token", token
+                "token", token,
+                "username", user.getName()
         ));
     }
 

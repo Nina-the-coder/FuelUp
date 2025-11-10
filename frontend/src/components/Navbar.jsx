@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import VariantButton from "./VariantButton";
+// import VariantButton from "./VariantButton"; // We are not using this anymore
 import Icon from "./Icon.jsx";
 import logo from "../assets/Logo.jpg";
 
 const Navbar = () => {
   const [navOpen, setNavOpen] = useState(false);
   const navigate = useNavigate();
+
+  // Read login state from localStorage
+  const isLoggedIn = !!localStorage.getItem("jwtToken");
+  const username = localStorage.getItem("username");
+
   const navigateto = (path) => {
     navigate(path);
   };
@@ -17,7 +22,17 @@ const Navbar = () => {
   };
 
   const handleLogin = () => {
-    navigate("/signup");
+    navigate("/login");
+  };
+
+  const handleLogout = () => {
+    // Clear the user's session from the frontend
+    localStorage.removeItem("jwtToken");
+    localStorage.removeItem("username");
+
+    // Redirect to login and reload
+    navigate("/login");
+    window.location.reload();
   };
 
   return (
@@ -58,13 +73,33 @@ const Navbar = () => {
           </ul>
         </div>
 
-        {/* Right Side: Button */}
-        <VariantButton
-          onClick={handleLogin}
-          variant="red"
-          size="large"
-          text="Sign Up"
-        />
+        {/* ✅ STYLING CHANGED HERE */}
+        <div className="flex items-center gap-4">
+          {isLoggedIn ? (
+            // --- USER IS LOGGED IN ---
+            <>
+              <span className="hidden sm:block font-semibold">
+                Hello, {username}
+              </span>
+              {/* Replaced VariantButton with a standard button */}
+              <button
+                onClick={handleLogout}
+                className="bg-red-600 text-white font-semibold px-4 py-2 rounded-lg text-lg hover:bg-red-700 transition-colors"
+              >
+                Logout
+              </button>
+            </>
+          ) : (
+            // --- USER IS LOGGED OUT ---
+            // Replaced VariantButton with a standard button
+            <button
+              onClick={handleLogin}
+              className="bg-red-600 text-white font-semibold px-4 py-2 rounded-lg text-lg hover:bg-red-700 transition-colors"
+            >
+              Login / Sign Up
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Mobile Nav Menu */}
