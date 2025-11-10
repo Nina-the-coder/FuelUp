@@ -53,7 +53,7 @@ const MessMenu = () => {
   return (
     <div className="p-4">
       {/* header */}
-      <div className="w-full flex items-center flex-col sm:flex-row gap-4 lg:m-4">
+      <div className="w-fit flex items-center flex-col sm:flex-row gap-4 lg:m-4">
         <div className="mr-8">
           <VariantButton
             onClick={() => navigateto("/")}
@@ -63,7 +63,7 @@ const MessMenu = () => {
           />
         </div>
 
-        <div className="flex gap-4 w-full justify-center md:justify-start">
+        <div className="flex gap-4 w-fit justify-center md:justify-start">
           {Days.map((day, index) => (
             <DayButton
               key={index}
@@ -74,13 +74,13 @@ const MessMenu = () => {
           ))}
         </div>
 
-        <div className="ml-auto flex gap-2">
+        <div className="w-full ml-8">
           <button
             onClick={() => {
               resetMenu();
               // keep UI stable on reset (resetMenu writes to storage & hook updates menu)
             }}
-            className="px-3 py-1 rounded bg-red-500 text-white text-sm"
+            className="px-3 h-10 py-1 rounded hover:cursor-pointer bg-red-500 text-white text-sm"
             title="Reset stored preferences"
           >
             Reset Preferences

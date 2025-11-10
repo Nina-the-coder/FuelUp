@@ -1,15 +1,24 @@
+// Dropdown.jsx
 import React from "react";
 
-const Dropdown = ({ options, selectedOption, onSelect, className }) => {
+/**
+ * Controlled Dropdown
+ * Props:
+ *  - options: array of strings
+ *  - value: selected string
+ *  - onChange: (value) => void
+ */
+const Dropdown = ({ options = [], value = options[0] || "", onChange = () => {}, className = "" }) => {
   return (
     <select
-      className={`border h-[40px] w-full rounded-xl px-4 py-0.5 border-card-bg/80 bg-white ${className}`}
-      value={selectedOption}
-      onChange={(e) => onSelect(e.target.value)}
+      className={`h-[40px] w-full rounded-xl px-3 border border-gray-200 bg-white text-sm ${className}`}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
+      aria-label="Select option"
     >
-      {options.map((option, index) => (
-        <option key={index} value={option}>
-          {option}
+      {options.map((opt, idx) => (
+        <option key={idx} value={opt}>
+          {opt}
         </option>
       ))}
     </select>

@@ -1,16 +1,36 @@
+// SearchBar.jsx
 import React from "react";
 import VariantButton from "./VariantButton";
 
-const SearchBar = ({text}) => {
+/**
+ * Controlled SearchBar
+ * Props:
+ *  - value (string)
+ *  - onChange (value) => void
+ *  - placeholder (string)
+ */
+const SearchBar = ({ value = "", onChange = () => {}, placeholder = "Search..." }) => {
   return (
-    <div className="h-[40px] flex w-full border rounded-xl border-card-bg/80 bg-white">
+    <div className="flex items-center h-[40px] border rounded-xl border-gray-200 bg-white overflow-hidden">
       <input
-        className="h-full rounded-l-xl w-full px-4 py-0 "
-        placeholder={text}
+        type="text"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        placeholder={placeholder}
+        className="flex-1 px-4 h-full outline-none text-sm"
+        aria-label={placeholder}
       />
-      <div className="h-full w-[40px]">
-
-      <VariantButton className="" size="free" variant="cta" icon="search" />
+      {value && (
+        <button
+          onClick={() => onChange("")}
+          aria-label="Clear search"
+          className="h-full px-2"
+        >
+          ✕
+        </button>
+      )}
+      <div className="h-full px-2">
+        <VariantButton onClick={() => {}} size="smsquare" variant="ghost" icon="search" aria-label="Search" />
       </div>
     </div>
   );
